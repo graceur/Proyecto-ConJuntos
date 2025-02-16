@@ -1,0 +1,86 @@
+/* Configuración general y Scroll Snap */
+html, body {
+    height: 100%;
+    margin: 0;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+  }
+  
+  /* Cada sección ocupará la altura real de la ventana (calculada vía JS) */
+  /* Se agrega overflow-y: auto para que, si el contenido sobrepasa, se pueda hacer scroll interno */
+  section {
+    height: calc(var(--vh, 1vh) * 100);
+    overflow-y: auto;
+    scroll-snap-align: start;
+  }
+  
+  /* ===============================
+     Estilos para los Cards
+     =============================== */
+  
+  /* Card 1: Título */
+  #card1 {
+    height: 60px;
+  }
+  
+  /* Card 2 */
+  #card2 {
+    height: 50px;
+  }
+  
+  /* Card 3 */
+  #card3 {
+    height: 50px;
+  }
+  
+  /* Card 4 */
+  #card4 {
+    height: 178px;
+  }
+  
+  /* Card 5 */
+  #card5 {
+    height: 120px;
+  }
+  
+  /* Card 6 */
+  #card6 {
+    height: 50px;
+  }
+  
+  /* Card 7 */
+  #card7 {
+    height: 120px;
+  }
+  
+  /* Card 8 */
+  #card8 {
+    height: 50px;
+  }
+  
+  /* Card 9 */
+  #card9 {
+    height: 120px;
+  }
+  
+  /* Card 10 */
+  #card10 {
+    height: 434px;
+  }
+  
+  /* Card 11 */
+  #card11 {
+    height: 50px;
+  }
+  
+  /* Card 12 */
+  #card12 {
+    height: 178px;
+  }
+  
+  /* Card 13 */
+  #card13 {
+    height: 178px;
+  }
+  

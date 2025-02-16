@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas</title>
+  <link rel="stylesheet" href="estadisticas.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Donaciones Registradas</h1>
+  
+    <label for="ordenar">Ordenar por:</label>
+    <select id="ordenar">
+      <option value="fecha-desc" selected>Fecha (más reciente primero)</option>
+      <option value="fecha-asc">Fecha (más antiguo primero)</option>
+      <option value="nombre-asc">Nombre (A-Z)</option>
+      <option value="nombre-desc">Nombre (Z-A)</option>
+      <option value="monto-desc">Monto (Mayor a Menor)</option>
+      <option value="monto-asc">Monto (Menor a Mayor)</option>
+    </select>
+  
+    <!-- Se agregan dos columnas nuevas: Moneda y Tipo de Donación -->
+    <table id="tabla-donaciones">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Moneda</th>
+          <th>Tipo de Donación</th>
+          <th>Monto</th>
+          <th>Mensaje</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>    
+
+  <div class="container">
+    <h1>Estadísticas de Donaciones</h1>
+    <div class="grafico-container">
+      <!-- Primer gráfico: de barras con los montos donados -->
+      <canvas id="grafico-donaciones"></canvas>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Voluntariados Registrados</h1>
+    <table id="tabla-voluntariados">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Habilidades</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <h1>Comparación Donaciones vs Voluntariados</h1>
+    <div class="grafico-container">
+      <!-- Segundo gráfico: agrupado por meses -->
+      <canvas id="grafico-progresivo"></canvas>
+    </div>
+    <a href="index.html" class="btn-volver">Volver</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="estadisticas.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donaciones en Tiempo Real</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Donaciones en Tiempo Real</h1>
+    <button id="btn-donar">Donar</button>
+    <button id="btn-voluntariado">Hacer Voluntariado</button>
+  </div>
+
+  <!-- Modal Donación -->
+  <div id="modal-donacion" class="modal">
+    <div class="modal-content">
+      <span class="close close-donacion">&times;</span>
+      <h2>Realizar Donación</h2>
+      <form id="form-donacion">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="email" id="email" placeholder="Email" required>
+        
+        <!-- Selección de Moneda -->
+        <label for="moneda">¿En qué moneda desea pagar?</label>
+        <select id="moneda" required>
+          <option value="Soles">Soles (S/)</option>
+          <option value="Dólares">Dólares ($)</option>
+        </select>
+        
+        <!-- Tipo de Donación -->
+        <p>Tipo de donación:</p>
+        <label><input type="radio" name="tipo_donacion" value="única" required> Donación Única</label>
+        <label><input type="radio" name="tipo_donacion" value="mensual"> Donación Mensual</label>
+        
+        <!-- Opciones de Monto -->
+        <div id="opciones-monto" style="display:none; margin-top: 10px;">
+          <p>Seleccione un monto:</p>
+          <label><input type="radio" name="monto_opcion" value="15" required> 15</label>
+          <label><input type="radio" name="monto_opcion" value="20"> 20</label>
+          <label><input type="radio" name="monto_opcion" value="50"> 50</label>
+          <label><input type="radio" name="monto_opcion" value="otro"> Otro</label>
+          <div id="input-otro-monto" style="display:none; margin-top: 5px;">
+            <input type="number" id="otro-monto" placeholder="Ingrese monto" min="1">
+          </div>
+        </div>
+        
+        <textarea id="mensaje" placeholder="Mensaje (opcional)"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Voluntariado (sin cambios) -->
+  <div id="modal-voluntariado" class="modal">
+    <div class="modal-content">
+      <span class="close close-voluntariado">&times;</span>
+      <h2>Registro de Voluntariado</h2>
+      <form id="form-voluntariado">
+        <input type="text" id="nombre-voluntario" placeholder="Nombre" required>
+        <input type="email" id="email-voluntario" placeholder="Email" required>
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <textarea id="habilidades" placeholder="Habilidades o experiencia"></textarea>
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <a href="estadisticas.html" class="btn-estadisticas">Estadísticas</a>
+  </div>
+
+  <script defer type="module" src="script.js"></script>
+</body>
+</html>
