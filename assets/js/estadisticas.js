@@ -82,14 +82,9 @@ const renderVolunteers = data => {
 // ---------------------
 // GRÁFICO DE BARRAS POR MESES
 // ---------------------
-
-// Obtén el contexto del canvas para Chart.js (asegúrate de que el canvas con id "barChart" exista en el HTML)
 const ctx = document.getElementById('barChart').getContext('2d');
-
-// Define los labels de los meses de interés
 const monthLabels = ["Noviembre 2024", "Diciembre 2024", "Enero 2025", "Febrero 2025"];
 
-// Crea el gráfico de barras con dos datasets: uno para donaciones y otro para voluntariados
 const barChart = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -121,25 +116,21 @@ const barChart = new Chart(ctx, {
   }
 });
 
-// Función para actualizar el gráfico de barras agrupando los datos por mes
 function updateChartData() {
-  // Inicializamos los contadores para cada mes: [Noviembre 2024, Diciembre 2024, Enero 2025, Febrero 2025]
   const donationCounts = [0, 0, 0, 0];
   const volunteerCounts = [0, 0, 0, 0];
 
-  // Recorremos los datos de donaciones
   donationData.forEach(d => {
     const dateObj = new Date(parseFecha(d.fecha));
-    const month = dateObj.getMonth(); // Enero: 0, Febrero: 1, ..., Noviembre: 10, Diciembre: 11
+    const month = dateObj.getMonth();
     const year = dateObj.getFullYear();
 
-    if (year === 2024 && month === 10) donationCounts[0]++;      // Noviembre 2024
-    else if (year === 2024 && month === 11) donationCounts[1]++;     // Diciembre 2024
-    else if (year === 2025 && month === 0) donationCounts[2]++;      // Enero 2025
-    else if (year === 2025 && month === 1) donationCounts[3]++;      // Febrero 2025
+    if (year === 2024 && month === 10) donationCounts[0]++;
+    else if (year === 2024 && month === 11) donationCounts[1]++;
+    else if (year === 2025 && month === 0) donationCounts[2]++;
+    else if (year === 2025 && month === 1) donationCounts[3]++;
   });
 
-  // Recorremos los datos de voluntariados
   volunteerData.forEach(v => {
     const dateObj = new Date(parseFecha(v.fecha));
     const month = dateObj.getMonth();
@@ -151,32 +142,83 @@ function updateChartData() {
     else if (year === 2025 && month === 1) volunteerCounts[3]++;
   });
 
-  // Actualizamos los datasets del gráfico de barras
   barChart.data.datasets[0].data = donationCounts;
   barChart.data.datasets[1].data = volunteerCounts;
   barChart.update();
 }
 
 // ---------------------
-// GRÁFICO CIRCULAR (DOUGHNUT) DE TIPO DE APORTE
+// GRÁFICO CIRCULAR (DOUGHNUT) DE TIPO DE MONEDA (Soles vs. Dólares)
 // ---------------------
-
-// Obtén el contexto del canvas para el gráfico circular (asegúrate de que el canvas con id "donationTypeChart" exista en el HTML)
 const donationTypeCtx = document.getElementById('donationTypeChart').getContext('2d');
 
-// Crea el gráfico circular (doughnut)
 const donationTypeChart = new Chart(donationTypeCtx, {
   type: 'doughnut',
   data: {
-    labels: ['Donaciones', 'Voluntariados'],
+    labels: ['Soles', 'Dólares'],
     datasets: [{
       data: [0, 0],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.6)',
-        'rgba(54, 162, 235, 0.6)'
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)'
       ],
       borderColor: [
-        'rgba(255, 99, 132, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// Función para eliminar acentos de una cadena
+function removeAccents(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// Actualiza el gráfico circular de moneda contando soles y dólares
+function updateDonationTypeChart() {
+  let solesCount = 0;
+  let dolaresCount = 0;
+
+  donationData.forEach(d => {
+    if (d.moneda) {
+      const moneda = removeAccents(d.moneda.toLowerCase().trim());
+      if (moneda === "soles") {
+        solesCount++;
+      } else if (moneda === "dolares") {
+        dolaresCount++;
+      }
+    }
+  });
+
+  donationTypeChart.data.datasets[0].data = [solesCount, dolaresCount];
+  donationTypeChart.update();
+}
+
+// ---------------------
+// NUEVOS GRÁFICOS CIRCULARES EN EL CUARTO SNAP-ITEM
+// ---------------------
+
+// 1. Gráfico de tipo de donación (única vs. mensual)
+const donationTypeDonacionCtx = document.getElementById('donationTypeDonacionChart').getContext('2d');
+const donationTypeDonacionChart = new Chart(donationTypeDonacionCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Única', 'Mensual'],
+    datasets: [{
+      data: [0, 0],
+      backgroundColor: [
+        'rgba(255, 159, 64, 0.6)',  // Color para única
+        'rgba(54, 162, 235, 0.6)'    // Color para mensual
+      ],
+      borderColor: [
+        'rgba(255, 159, 64, 1)',
         'rgba(54, 162, 235, 1)'
       ],
       borderWidth: 1
@@ -185,45 +227,101 @@ const donationTypeChart = new Chart(donationTypeCtx, {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'bottom'
-      }
-    }
+    plugins: { legend: { position: 'bottom' } }
   }
 });
 
-// Función para actualizar el gráfico circular
-function updateDonationTypeChart() {
-  // Se cuentan los registros de cada colección
-  const countDonations = donationData.length;
-  const countVolunteers = volunteerData.length;
+// Función para actualizar el gráfico de tipo de donación (única vs. mensual)
+function updateDonationTypeDonacionChart() {
+  let unicaCount = 0;
+  let mensualCount = 0;
+
+  donationData.forEach(d => {
+    if (d.tipo) {
+      const tipo = removeAccents(d.tipo.toLowerCase().trim());
+      // Consideramos tanto "unica" como "única" para donación única
+      if (tipo === "unica" || tipo === "única" || tipo.includes("unica")) {
+        unicaCount++;
+      } else if (tipo.includes("mensual")) {
+        mensualCount++;
+      }
+    }
+  });
+
+  donationTypeDonacionChart.data.datasets[0].data = [unicaCount, mensualCount];
+  donationTypeDonacionChart.update();
+}
+
+// 2. Gráfico de monto de donación (15, 20, 50 y otros)
+const donationAmountCtx = document.getElementById('donationAmountChart').getContext('2d');
+const donationAmountChart = new Chart(donationAmountCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['15', '20', '50', 'Otros'],
+    datasets: [{
+      data: [0, 0, 0, 0],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.6)',   // Para monto 15
+        'rgba(75, 192, 192, 0.6)',    // Para monto 20
+        'rgba(153, 102, 255, 0.6)',   // Para monto 50
+        'rgba(201, 203, 207, 0.6)'    // Para otros
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(201, 203, 207, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// Función para actualizar el gráfico de monto de donación
+function updateDonationAmountChart() {
+  let count15 = 0, count20 = 0, count50 = 0, countOthers = 0;
   
-  // Se asignan los valores al dataset
-  donationTypeChart.data.datasets[0].data = [countDonations, countVolunteers];
-  donationTypeChart.update();
+  donationData.forEach(d => {
+    if (d.monto) {
+      const monto = Number(d.monto);
+      if (monto === 15) count15++;
+      else if (monto === 20) count20++;
+      else if (monto === 50) count50++;
+      else countOthers++;
+    }
+  });
+  
+  donationAmountChart.data.datasets[0].data = [count15, count20, count50, countOthers];
+  donationAmountChart.update();
 }
 
 // ---------------------
 // OBSERVADORES EN TIEMPO REAL CON FIREBASE
 // ---------------------
-
-// Observa en tiempo real la colección de donaciones ("usuarios")
 onSnapshot(collection(db, "usuarios"), snap => {
   donationData = snap.docs.map(doc => doc.data());
   renderDonations(donationData);
-  updateChartData();         // Actualiza el gráfico de barras
-  updateDonationTypeChart(); // Actualiza el gráfico circular
+  updateChartData();
+  updateDonationTypeChart();
+  // Actualiza los nuevos gráficos (solo dependen de donationData)
+  updateDonationTypeDonacionChart();
+  updateDonationAmountChart();
 });
 
-// Observa en tiempo real la colección de voluntariados
 onSnapshot(collection(db, "voluntariados"), snap => {
   volunteerData = snap.docs.map(doc => doc.data());
   renderVolunteers(volunteerData);
-  updateChartData();         // Actualiza el gráfico de barras
-  updateDonationTypeChart(); // Actualiza el gráfico circular
+  updateChartData();
+  updateDonationTypeChart();
+  // Los nuevos gráficos no dependen de voluntariados, pero si deseas actualizarlos en conjunto, también puedes llamarlos aquí:
+  updateDonationTypeDonacionChart();
+  updateDonationAmountChart();
 });
 
-// Actualiza la tabla al cambiar el selector
 selDonaciones.addEventListener("change", () => renderDonations(donationData));
 selVoluntariados.addEventListener("change", () => renderVolunteers(volunteerData));

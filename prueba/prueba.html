@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Animado Repetible</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    /* Espacio para forzar el scroll */
+    .spacer {
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    .counter-container {
+      text-align: center;
+      font-size: 2rem;
+      padding: 50px;
+      background: #e0e0e0;
+    }
+    .counter {
+      font-weight: bold;
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="spacer">
+    <p style="padding: 20px;">Desplázate hacia abajo...</p>
+  </div>
+
+  <div class="counter-container">
+    <p>Impacto en personas: <span class="counter" data-target="2345">0</span></p>
+    <p>En hogares: <span class="counter" data-target="154878">0</span></p>
+  </div>
+
+  <script>
+    // Función para animar el contador
+    function animateCounter(counter) {
+      const target = +counter.getAttribute('data-target');
+      const duration = 2000; // Duración total de la animación en ms
+      let startTime = null;
+
+      function updateCounter(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        counter.textContent = Math.floor(progress * target);
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target; // Asegura que se muestre el valor final exacto
+        }
+      }
+      requestAnimationFrame(updateCounter);
+    }
+
+    // Opciones del Intersection Observer
+    const observerOptions = {
+      threshold: 0.5  // Se activa cuando al menos el 50% del elemento es visible
+    };
+
+    // Usamos una clase 'animated' para evitar disparar la animación repetidamente mientras el contador sigue en vista
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Si el contador no está ya animado, reiniciarlo y animarlo
+          if (!entry.target.classList.contains('animated')) {
+            entry.target.textContent = 0;
+            animateCounter(entry.target);
+            entry.target.classList.add('animated');
+          }
+        } else {
+          // Al salir de la vista, eliminamos la clase para permitir la reanimación y reiniciamos el contador
+          entry.target.classList.remove('animated');
+          entry.target.textContent = 0;
+        }
+      });
+    }, observerOptions);
+
+    // Observamos cada contador
+    document.querySelectorAll('.counter').forEach(counter => {
+      observer.observe(counter);
+    });
+  </script>
+</body>
+</html>

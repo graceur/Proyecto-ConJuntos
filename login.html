@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="contenedor">
+        <h1 class="titulo">Iniciar Sesión</h1>
+        <form id="formulario_login"> 
+            <label for="email_login">Email:</label>
+            <input type="email" id="email_login" required>
+            <br><br>
+            <label for="password_login">Contraseña:</label>
+            <input type="password" id="password_login" required>
+            <br><br>
+            <div class="flex">
+                <input type="submit" value="Iniciar Sesión">
+                <br><br>
+            </div>
+        </form>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
+
+    <!-- Tu script como módulo -->
+    <script type="module" src="assets/js/login.js"></script> 
+</body>
+</html>
+
