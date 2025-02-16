@@ -23,19 +23,25 @@
             <!-- Sección Izquierda: 6 cards -->
             <div class="seccionizquierda col-3 p-0 d-flex flex-column justify-content-between">
               <div id="minicard1" class="card minicards">
-                <div class="card-body p-1 text-center">1</div>
+                <div class="card-body p-1 text-center">
+                  TOTAL DE DONANTES
+                </div>
               </div>
               <div id="minicard2" class="card minicards">
                 <div class="card-body p-1 text-center">2</div>
               </div>
               <div id="minicard3" class="card minicards">
-                <div class="card-body p-1 text-center">3</div>
+                <div class="card-body p-1 text-center">
+                  TOTAL DE VOLUNTARIOS
+                </div>
               </div>
               <div id="minicard4" class="card minicards">
                 <div class="card-body p-1 text-center">4</div>
               </div>
               <div id="minicard5" class="card minicards">
-                <div class="card-body p-1 text-center">5</div>
+                <div class="card-body p-1 text-center">
+                  TOTAL RECAUDADO
+                </div>
               </div>
               <div id="minicard6" class="card minicards">
                 <div class="card-body p-1 text-center">6</div>
@@ -44,25 +50,48 @@
             <!-- Sección Medio: 3 cards -->
             <div class="seccionmedio col-6 p-0 d-flex flex-column justify-content-between">
               <div id="minicard7" class="card minicards">
-                <div class="card-body p-1 text-center">7</div>
+                <div class="card-body p-1 text-center">
+                  COMPARACION DE CANT. DE VOLUNTARIADOS Y DONACIONES POR MES
+                </div>
               </div>
               <div id="minicard8" class="card minicards">
-                <div class="card-body p-1 text-center">8</div>
+                <div class="card-body p-1 text-center">
+                  <canvas id="barChart" width="400" height="316"></canvas>
+                </div>
               </div>
               <div id="minicard9" class="card minicards">
-                <div class="card-body p-1 text-center">9</div>
-              </div>
+                <div class="card-body p-1 text-center">
+                  <div class="row">
+                    <div class="col-6">
+                      <a href="#donacionesSection" class="d-block">
+                        <button class="btn botonseccion btn-primary w-100">DONACIONES REGISTRADAS</button>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="#voluntariadosSection" class="d-block">
+                        <button class="btn botonseccion btn-secondary w-100">VOLUNTARIADOS REGISTRADOS</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>              
             </div>
             <!-- Sección Derecha: 3 cards -->
             <div class="seccionderecha col-3 p-0 d-flex flex-column justify-content-between">
               <div id="minicard10" class="card minicards">
-                <div class="card-body p-1 text-center">10</div>
+                <div class="card-body p-1 text-center">
+                  <canvas id="donationTypeChart" width="10" height="10"></canvas>
+                </div>
               </div>
               <div id="minicard11" class="card minicards">
-                <div class="card-body p-1 text-center">11</div>
+                <div class="card-body p-1 text-center">
+                  TIPO DE MONEDA
+                </div>
               </div>
               <div id="minicard12" class="card minicards">
-                <div class="card-body p-1 text-center">12</div>
+                <div class="card-body p-1 text-center">
+                   FRECUENCIA DE PAGO 
+                </div>
               </div>
             </div>
           </div>
@@ -70,8 +99,8 @@
       </div>
     </div>
 
-    <!-- Segundo snap-item -->
-    <div class="snap-item text-white d-flex justify-content-center align-items-center">
+    <!-- Segundo snap-item: Donaciones Registradas -->
+    <div id="donacionesSection" class="snap-item text-white d-flex justify-content-center align-items-center">
       <div class="card-item card w-100 h-100 border-0 text-white">
         <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 text-center">
           <!-- Cuadro 1: Donaciones Registradas -->
@@ -110,9 +139,9 @@
       </div>
     </div>
 
-    <!-- Tercer snap-item -->
-    <div class="snap-item text-white d-flex justify-content-center align-items-center">
-      <div class="card-item card w-100 h-100 border-0  text-white">
+    <!-- Tercer snap-item: Voluntariados Registrados -->
+    <div id="voluntariadosSection" class="snap-item text-white d-flex justify-content-center align-items-center">
+      <div class="card-item card w-100 h-100 border-0 text-white">
         <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 text-center">
           <!-- Cuadro 2: Voluntariados Registrados -->
           <div class="container my-4">
@@ -145,7 +174,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Cuarto snap-item -->
+    <div class="snap-item text-white d-flex justify-content-center align-items-center">
+      <div class="card-item card w-100 h-100 border-0 text-white">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center w-100 h-100 text-center">
+          <!-- Aquí puedes colocar el contenido que necesites para el cuarto snap-item -->
+        </div>
+      </div>
+    </div>
+
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="assets/js/estadisticas.js"></script>
 </body>
 </html>

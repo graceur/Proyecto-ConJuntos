@@ -1,40 +1,43 @@
 /* Contenedor con scroll snapping */
 .snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-  }
-  
-  /* Cada sección se ajusta al viewport */
-  .snap-item {
-    scroll-snap-align: start;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .card-item {
-    background-color:rgb(255, 145, 0);
-  }
-  
-  /* Estilos para las minicards */
-  .minicards {
-    background-color: rgb(255, 255, 255);
-    margin: 0;
-  }
-  
-  
-  /* Ejemplos de alturas personalizadas */
-  #minicard1 { height: 50px; margin-left: 5px; margin-top: 5px;}
-  #minicard2 { height: 153px; margin-left: 5px;}
-  #minicard3 { height: 50px; margin-left: 5px;}
-  #minicard4 { height: 153px; margin-left: 5px;}
-  #minicard5 { height: 50px; margin-left: 5px;}
-  #minicard6 { height: 153px; margin-bottom: 5px; margin-left: 5px;}
-  #minicard7 { height: 50px; margin-left: 5px; margin-right: 5px; margin-top: 5px;}
-  #minicard8 { height: 523px; margin-left: 5px; margin-right: 5px;}
-  #minicard9 { height: 50px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;}
-  #minicard10 { height: 207px; margin-right: 5px; margin-top: 5px;}
-  #minicard11 { height: 207px; margin-right: 5px;}
-  #minicard12 { height: 207px; margin-right: 5px; margin-bottom: 5px;}
-  
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Cada sección se ajusta al viewport */
+.snap-item {
+  scroll-snap-align: start;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-item {
+  background-color:rgb(255, 145, 0);
+}
+
+/* Estilos para las minicards */
+.minicards {
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+  border-radius: 17px;
+}
+
+.botonseccion{
+  border-radius: 17px;
+}
+
+/* Ejemplos de alturas personalizadas */
+#minicard1 { height: 50px; margin-left: 5px; margin-top: 5px;}
+#minicard2 { height: 153px; margin-left: 5px;}
+#minicard3 { height: 50px; margin-left: 5px;}
+#minicard4 { height: 153px; margin-left: 5px;}
+#minicard5 { height: 50px; margin-left: 5px;}
+#minicard6 { height: 153px; margin-bottom: 5px; margin-left: 5px;}
+#minicard7 { height: 50px; margin-left: 5px; margin-right: 5px; margin-top: 5px;}
+#minicard8 { height: 523px; margin-left: 5px; margin-right: 5px;}
+#minicard9 { height: 50px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px;}
+#minicard10 { height: 207px; margin-right: 5px; margin-top: 5px;}
+#minicard11 { height: 207px; margin-right: 5px;}
+#minicard12 { height: 207px; margin-right: 5px; margin-bottom: 5px;}
