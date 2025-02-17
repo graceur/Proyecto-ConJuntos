@@ -2,10 +2,10 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden; /* Evita el scroll horizontal */
+  overflow-x: hidden; 
+  height: 100%;
 }
 
-/* Contenedor con scroll snapping */
 .snap-container {
   width: 100%;
   scroll-snap-type: y mandatory;
@@ -13,7 +13,6 @@ html, body {
   height: 100vh;
 }
 
-/* Cada sección se ajusta al viewport */
 .snap-item {
   width: 100%;
   scroll-snap-align: start;
@@ -23,12 +22,11 @@ html, body {
   justify-content: center;
 }
 .card-item {
-  background-color:rgb(224, 168, 54);
+  background-color:rgb(161, 82, 9);
 }
 
-/* Estilos para las minicards */
 .minicards {
-  background-color:rgb(153, 134, 110);
+  background-color:rgb(235, 223, 213);
   margin: 0;
   border-radius: 17px;
 }
@@ -37,7 +35,6 @@ html, body {
   border-radius: 17px;
 }
 
-/* Ejemplos de alturas personalizadas */
 #minicard1 { height: 50px; margin-left: 5px; margin-top: 5px;}
 #minicard2 { height: 153px; margin-left: 5px;}
 #minicard3 { height: 50px; margin-left: 5px;}
@@ -51,19 +48,11 @@ html, body {
 #minicard11 { height: 207px; margin-right: 5px;}
 #minicard12 { height: 207px; margin-right: 5px; margin-bottom: 5px;}
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-/* Quitar márgenes y bordes redondeados a las cards para que se peguen */
 .card {
   margin-bottom: 3.6px;
   border-radius: 5px;
 }
-/* Contenedor flex para la fila de minicards */
+
 .minicards-flex {
   display: flex;
   width: 100%;
@@ -71,14 +60,35 @@ body {
   padding: 0;
   margin: 0;
 }
-/* Estilos para los minicards grandes y pequeños */
+
 .minicard-large {
-  width: 45%; /* Más anchos */
+  width: 45%; 
 }
 .minicard-small {
   width: 5%;
 }
-/* Remover cualquier margen interno entre las cards */
+
 .minicards-flex > .card {
   margin: 0;
+}
+.table-responsive thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1; 
+  background-color: #343a40; 
+}
+
+.minicard-seccion2{
+  background-color:rgb(235, 223, 213);
+}
+
+.minicard-seccion3{
+  background-color:rgb(235, 223, 213);
+}
+
+.cuadrodedatos{
+  height: 465px;
+}
+.card-title-main{
+  margin-top: 2px;
 }
